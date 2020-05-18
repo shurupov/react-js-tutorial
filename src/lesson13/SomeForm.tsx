@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { ValidationResult, isNotEmpty as getIsEmptyError } from "./validator";
+import {
+  ValidationResult,
+  getIsEmptyError,
+  getIsAlphanumericError,
+} from "./validator";
 
 export const SomeForm = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +16,8 @@ export const SomeForm = () => {
 
     const isEmptyError = getIsEmptyError(value, "username");
     setUsernameError(isEmptyError);
-    // validator.checkIsAlphanumeric("username");
+    const isAlphanumeric = getIsAlphanumericError(value, "username");
+    setUsernameError(isAlphanumeric);
   };
 
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {

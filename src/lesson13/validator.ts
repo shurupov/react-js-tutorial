@@ -4,7 +4,7 @@ export type ValidationResult = Error | undefined;
 
 export type ValidatorFunc = (value: Value, key: string) => ValidationResult;
 
-export const isNotEmpty: ValidatorFunc = (value, key) => {
+export const getIsEmptyError: ValidatorFunc = (value, key) => {
   if (
     typeof value !== "number" && typeof value !== "boolean" ? !!value : true
   ) {
@@ -12,6 +12,13 @@ export const isNotEmpty: ValidatorFunc = (value, key) => {
   }
 
   return new Error(`${key} is required`);
+};
+
+export const getIsAlphanumericError: ValidatorFunc = (value, key) => {
+  if (/^[a-zA-Z0-9_]*$/.test(value.toString())) {
+    return undefined;
+  }
+  return new Error(`${key} must be alphanumeric`);
 };
 
 // export class Validator {
